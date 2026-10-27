@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sarran.lekopien.com/sitemap.xml

@@ -8,6 +8,7 @@ Small sites for lekopien.com, each deployed as its own free Cloudflare Worker:
 | `payment/` | https://payment.lekopien.com | How payment works, M-Pesa and bank details, FAQ |
 | `resources/` | https://resources.lekopien.com | Free guides, an interactive launch checklist, and useful tools |
 | `invoices/` | https://invoices.lekopien.com | Invoice generator and payment tracker (data stays in your browser) |
+| `sarran/` | https://sarran.lekopien.com | Sarran Mahonye Otieno, Clinical Dietitian: services, WhatsApp booking, two-column blog, privacy policy |
 
 No build step and no dependencies: each folder is plain HTML, CSS and JavaScript.
 
@@ -17,7 +18,7 @@ M-Pesa and NCBA bank details live in the `PAYMENT` object near the bottom of `pa
 
 ## Deploy
 
-In **Cloudflare → Workers & Pages → Create → Import a repository**, import this repo once per folder, and set **Root directory** to `info`, `payment`, `resources` or `invoices`. Each folder's `wrangler.jsonc` already names its subdomain, so Cloudflare attaches `info.lekopien.com` and the others automatically.
+In **Cloudflare → Workers & Pages → Create → Import a repository**, import this repo once per folder, and set **Root directory** to `info`, `payment`, `resources`, `invoices` or `sarran`. Each folder's `wrangler.jsonc` already names its subdomain, so Cloudflare attaches `info.lekopien.com` and the others automatically.
 
 Preview locally with `npx serve info` (or `payment`, `resources`).
 
@@ -33,6 +34,16 @@ Invoices are saved in the browser you make them in (localStorage), so anyone els
 Import the repo in Cloudflare with root directory `invoices`. No secrets or settings are needed.
 
 Run it locally by opening `invoices/public/index.html` through any static server (`npx serve invoices/public`); without the Worker it saves to the browser only.
+
+## Sarran's site (`sarran/`)
+
+Plain HTML, CSS and JavaScript. Her details live in the `SITE` object at the top of `sarran/site.js`: KNDI registration number, degree, university, email and package prices. Anything left empty shows a marked placeholder ("to be added") on the site, and empty prices show "Ask on WhatsApp".
+
+- **Photo:** upload her portrait as `sarran/img/sarran.jpg`. Until then a labelled placeholder box is shown.
+- **Booking:** the form on `services.html` opens WhatsApp (+254 711 169 340) with the request prefilled and requires the privacy consent tick. Nothing is stored on the site.
+- **Blog:** posts are in `sarran/blog/`, in two columns: A Dietitian's World and The Arbiter's Corner. To add one, copy an existing post file and add a card for it in `sarran/blog/index.html` and `sarran/index.html`.
+
+Import the repo in Cloudflare with root directory `sarran`.
 
 ## License
 
