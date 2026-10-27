@@ -23,3 +23,7 @@ Preview locally with `npx serve info` (or `payment`, `resources`).
 ## License
 
 MIT
+
+## Author
+
+Built by **David Lekopien** ([@Lekopien](https://github.com/Lekopien)) · [lekopien.com](https://lekopien.com)
