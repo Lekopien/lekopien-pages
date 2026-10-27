@@ -140,3 +140,15 @@ footer .fine { margin-top: 28px; padding-top: 16px; border-top: 1px solid rgba(2
 .gallery figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; }
 article.post .post-hero { width: 100%; max-height: 520px; object-fit: cover; object-position: center 30%; border-radius: 12px; margin: 0 0 24px; }
 @media (max-width: 620px) { .gallery { grid-template-columns: 1fr 1fr; } .gallery figure:last-child { grid-column: span 2; } .gallery figure:last-child img { aspect-ratio: 16 / 11; object-position: center 25%; } }
+
+/* Blog tabs, with a hint of medical blue */
+:root { --medical-blue: #1F6FB2; --medical-blue-soft: #E6F1FA; --medical-blue-line: #B9D6EE; }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 3px solid var(--medical-blue); margin-bottom: 20px; }
+.tab { font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; padding: 11px 20px; border: 1px solid var(--medical-blue-line); border-bottom: 0; border-radius: 10px 10px 0 0; background: var(--medical-blue-soft); color: var(--medical-blue); transition: background .2s ease; }
+.tab:hover { background: #d6e8f7; }
+.tab[aria-selected="true"] { background: var(--medical-blue); color: #fff; border-color: var(--medical-blue); }
+.tab:focus-visible { outline: 3px solid var(--color-accent-action); outline-offset: 2px; }
+.panel-intro { color: var(--muted); margin: 0 0 16px; }
+.tab-panel .post-list a:hover { border-color: var(--medical-blue); }
+.tab-panel .post-list .meta { color: var(--medical-blue); }
+@media (max-width: 480px) { .tab { flex: 1; padding: 10px 12px; font-size: 14px; text-align: center; } }
