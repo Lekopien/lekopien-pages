@@ -63,7 +63,7 @@ export function renderDocument(inv, s) {
   const terms = inv.terms.map((x) => fill(x, vars)).filter((x) => x.trim());
   const bank = s.payment.showBank ? Object.entries(s.payment.bank).filter(([, v]) => String(v).trim()) : [];
 
-  const head = (right) => `<header class="doc-head"><div><div class="biz"><img class="mark" src="lekopien-mark-mono.svg" alt="">${esc(b.name)}</div><div class="tag">${esc(b.tagline)}</div>${right ? "" : `<div class="tag">${esc([b.location, b.website].filter(Boolean).join(" · "))}</div>`}</div>${right}</header>`;
+  const head = (right) => `<header class="doc-head"><div><div class="biz"><img class="mark" src="lekopien-badge.svg" alt="">${esc(b.name)}</div><div class="tag">${esc(b.tagline)}</div>${right ? "" : `<div class="tag">${esc([b.location, b.website].filter(Boolean).join(" · "))}</div>`}</div>${right}</header>`;
 
   const invoicePage = `
   <section class="page">

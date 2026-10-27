@@ -1,6 +1,7 @@
-/* The invoice document: light paper, navy and gold, matching the PDF invoices. */
+/* The invoice document: white paper in the lekopien teal palette. --navy is the dark teal page colour,
+   --gold the readable teal accent (#007c85 is 5:1 on white; #00f0ff is only used on dark fills). */
 .doc {
-  --navy: #0b1620; --gold: #a8853a; --ink: #1d2328; --soft: #5a636b; --box: #f3f1ea; --rule: #d9d5ca;
+  --navy: #0d1515; --gold: #007c85; --ink: #1a2324; --soft: #55666a; --box: #e8f6f7; --rule: #c9e1e3;
   width: 210mm; color: var(--ink); font: 9.6pt/1.45 Inter, system-ui, sans-serif; zoom: var(--z, 1); color-scheme: light;
 }
 .doc .page { background: #fff; padding: 15mm 15mm 14mm; min-height: 297mm; margin-bottom: 14px; box-shadow: 0 4px 24px rgba(0, 0, 0, .45); }
@@ -8,7 +9,7 @@
 .doc .doc-head { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; }
 /* Same lockup as the site navbar: Pixel Grid mark, then the wordmark in Space Grotesk. */
 .doc .biz { display: flex; align-items: center; gap: 10px; font: 500 19pt/1 "Space Grotesk", Inter, sans-serif; letter-spacing: .18em; text-transform: uppercase; color: var(--ink); }
-.doc .biz .mark { width: 30px; height: 30px; flex: none; }
+.doc .biz .mark { width: 36px; height: 36px; flex: none; }
 .doc .tag { color: var(--soft); font-size: 8.6pt; margin-top: 3px; }
 .doc .meta { text-align: right; }
 .doc .title { font: 300 25pt/1 Inter, sans-serif; letter-spacing: .14em; color: var(--gold); margin-bottom: 10px; text-transform: uppercase; }
@@ -18,16 +19,16 @@
 .doc dd { margin: 0; text-align: right; }
 .doc .stamp { display: inline-block; margin-top: 8px; border: 2px solid #1f8a5b; color: #1f8a5b; font: 800 9pt Inter, sans-serif; letter-spacing: .14em; text-transform: uppercase; padding: 3px 10px; transform: rotate(-3deg); }
 .doc .stamp.void { border-color: #b23b3b; color: #b23b3b; }
-.doc .rule { height: 2px; background: var(--navy); margin: 12px 0 14px; }
+.doc .rule { height: 2px; background: linear-gradient(90deg, var(--navy) 85%, #00f0ff 85%); margin: 12px 0 14px; }
 .doc .parties { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .doc .party h4, .doc h3.sec { font: 700 7.6pt Inter, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin: 0 0 5px; }
 .doc .party .box { background: var(--box); padding: 8px 10px; font-size: 8.6pt; min-height: 100%; word-break: break-word; }
 .doc .party.accent .box { border-left: 3px solid var(--gold); }
 .doc h3.sec { font-size: 9pt; color: var(--navy); letter-spacing: .12em; margin: 18px 0 6px; }
 .doc table.items { width: 100%; border-collapse: collapse; font-size: 8.6pt; }
-.doc .items th { background: var(--navy); color: #fff; text-align: left; font: 700 7.4pt Inter, sans-serif; letter-spacing: .1em; text-transform: uppercase; padding: 6px 7px; }
+.doc .items th { background: var(--navy); color: #dce4e5; border-bottom: 2px solid #00f0ff; text-align: left; font: 700 7.4pt Inter, sans-serif; letter-spacing: .1em; text-transform: uppercase; padding: 6px 7px; }
 .doc .items td { padding: 6px 7px; border-bottom: 1px solid var(--rule); vertical-align: top; }
-.doc .items tbody tr:nth-child(even) td { background: #faf9f5; }
+.doc .items tbody tr:nth-child(even) td { background: #f3fafb; }
 .doc .items tr { break-inside: avoid; }
 .doc .items .n { text-align: right; white-space: nowrap; }
 .doc .items .ref { color: var(--gold); font-weight: 700; white-space: nowrap; width: 46px; }
@@ -39,7 +40,7 @@
 .doc .sums dt { text-align: left; color: var(--soft); }
 .doc .due { display: flex; justify-content: space-between; align-items: center; background: var(--navy); color: #fff; padding: 7px 10px; margin-top: 6px; }
 .doc .due span { font: 700 8pt Inter, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
-.doc .due b { font-size: 12pt; color: #f0d8a0; }
+.doc .due b { font-size: 12pt; color: #00f0ff; }
 .doc .words { text-align: right; font-size: 7.8pt; color: var(--soft); font-style: italic; margin-top: 3px; }
 .doc .foot-grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: 18px; break-inside: avoid; }
 .doc .foot-grid p { margin: 0 0 5px; font-size: 8.6pt; }
