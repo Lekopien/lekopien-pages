@@ -1,4 +1,4 @@
-// Keeps all invoices and settings in this browser, and in Cloudflare KV too when the Worker has it bound.
+// Keeps all invoices and settings in this browser (and in a server store if /api/data ever answers).
 import { DEFAULT_SETTINGS } from "./defaults.js";
 
 const KEY = "lekopien-invoices-v1";

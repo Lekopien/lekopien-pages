@@ -135,7 +135,7 @@ function topbar(extra = "") {
   return `<header class="top"><div class="wrap">
     <a class="brand" href="#/">lekopien<span>.</span>invoices</a>
     <nav>${extra}<button class="btn sm" data-new>+ New invoice</button>
-      <a href="#/settings">Settings</a><button class="link" data-export>Backup</button><button class="link" data-import>Restore</button><a href="/logout">Sign out</a></nav>
+      <a href="#/settings">Settings</a><button class="link" data-export>Backup</button><button class="link" data-import>Restore</button></nav>
   </div><div class="sync wrap" id="sync">${SYNC_LABEL[syncState]}</div></header>`;
 }
 
@@ -304,7 +304,7 @@ function settingsView() {
     </details>
     </form>
     <details open><summary>Backup</summary>
-      <p class="hint">${syncState === "local" ? "Invoices are stored in this browser only. Export a backup now and then, or turn on Cloudflare KV sync (see the README)." : "Invoices sync to Cloudflare KV, so they appear on every device you sign in from."}</p>
+      <p class="hint">Invoices are saved in this browser only, so nobody else can see them. Export a backup now and then, and restore it to move your invoices to another device or browser.</p>
       <div class="tpl"><button class="btn ghost sm" data-export>Export backup (.json)</button><button class="btn ghost sm" data-import>Restore from backup</button></div>
     </details>
   </main>`;

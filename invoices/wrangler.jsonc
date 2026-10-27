@@ -1,6 +1,5 @@
-// Private invoice generator at https://invoices.lekopien.com (Cloudflare Workers free plan).
-// In Cloudflare, set this folder ("invoices") as the project's root directory, then add the
-// secret INVOICE_PASSWORD under Settings → Variables and Secrets. Without it, nobody can log in.
+// Invoice generator at https://invoices.lekopien.com (Cloudflare Workers free plan).
+// In Cloudflare, set this folder ("invoices") as the project's root directory.
 {
   "name": "lekopien-invoices",
   "main": "worker.js",
@@ -9,7 +8,4 @@
   "keep_vars": true,
   "assets": { "directory": "./public", "binding": "ASSETS", "run_worker_first": true },
   "routes": [{ "pattern": "invoices.lekopien.com", "custom_domain": true }]
-  // Optional: sync invoices across devices with a free KV namespace. Create one named
-  // "invoices" (Storage & Databases → KV), then uncomment and paste its id:
-  // , "kv_namespaces": [{ "binding": "INVOICES", "id": "PASTE_NAMESPACE_ID" }]
 }
