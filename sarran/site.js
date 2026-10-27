@@ -49,7 +49,7 @@ document.querySelectorAll("[data-wa]").forEach((a) => {
   a.rel = "noopener";
 });
 
-// Photo: show a labelled placeholder until img/sarran.jpg is uploaded.
+// Portrait: show a labelled placeholder if the image is missing.
 document.querySelectorAll(".photo img").forEach((img) => {
   const fail = () => img.closest(".photo").classList.add("missing");
   if (img.complete && img.naturalWidth === 0) fail();

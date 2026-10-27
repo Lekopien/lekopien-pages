@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" role="img" aria-labelledby="t">
+  <title id="t">Illustrated caricature of Sarran, clinical dietitian, smiling with her hand under her chin</title>
+  <defs>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8a5638"/>
+      <stop offset="1" stop-color="#6a3c25"/>
+    </linearGradient>
+    <linearGradient id="coat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#eef4f2"/>
+    </linearGradient>
+    <clipPath id="frame"><rect width="400" height="500" rx="28"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#frame)">
+    <!-- backdrop -->
+    <rect width="400" height="500" fill="#E2ECE9"/>
+    <circle cx="200" cy="230" r="168" fill="#d2e2dc"/>
+    <circle cx="200" cy="230" r="168" fill="none" stroke="#FF6B6B" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+    <!-- little food + chess motifs -->
+    <g opacity=".9">
+      <g transform="translate(46 70) rotate(-14)"><ellipse cx="0" cy="0" rx="16" ry="9" fill="#7fb07a"/><path d="M-14 0 H14" stroke="#4f7d4b" stroke-width="2"/></g>
+      <g transform="translate(350 96)"><circle r="12" fill="#FF6B6B"/><path d="M0 -12 q4 -8 10 -8" stroke="#4f7d4b" stroke-width="3" fill="none"/></g>
+      <g transform="translate(344 330)" fill="#2C3E50"><circle cy="-16" r="7"/><path d="M-6 -9 h12 l4 18 h-20 z"/><rect x="-13" y="9" width="26" height="6" rx="2"/></g>
+      <g transform="translate(52 300)"><rect x="-12" y="-12" width="12" height="12" fill="#2C3E50"/><rect x="0" y="0" width="12" height="12" fill="#2C3E50"/><rect x="-12" y="-12" width="24" height="24" fill="none" stroke="#2C3E50" stroke-width="2"/></g>
+    </g>
+
+    <!-- body: lab coat -->
+    <path d="M40 500 C52 420 110 380 200 374 C290 380 348 420 360 500 Z" fill="url(#coat)" stroke="#c9d9d4" stroke-width="2"/>
+    <!-- black top -->
+    <path d="M150 382 L200 470 L250 382 C232 376 168 376 150 382 Z" fill="#1f2328"/>
+    <!-- lapels -->
+    <path d="M150 382 L200 470 L168 500 L132 500 L120 420 Z" fill="#ffffff" stroke="#c9d9d4" stroke-width="2"/>
+    <path d="M250 382 L200 470 L232 500 L268 500 L280 420 Z" fill="#ffffff" stroke="#c9d9d4" stroke-width="2"/>
+    <!-- name badge -->
+    <rect x="74" y="436" width="58" height="26" rx="4" fill="#ffffff" stroke="#2C3E50" stroke-width="2"/>
+    <rect x="80" y="454" width="46" height="3" rx="1.5" fill="#FF6B6B"/>
+    <text x="103" y="449" font-family="Arial, sans-serif" font-size="9" font-weight="800" fill="#2C3E50" text-anchor="middle" letter-spacing="1">SARRAN</text>
+
+    <!-- neck -->
+    <path d="M172 300 L170 384 C185 396 215 396 230 384 L228 300 Z" fill="#6a3c25"/>
+    <path d="M172 340 C190 356 212 356 228 340 L228 300 L172 300 Z" fill="#5a3220" opacity=".55"/>
+    <!-- cross necklace -->
+    <path d="M168 372 Q200 424 232 372" fill="none" stroke="#e7c36a" stroke-width="2"/>
+    <g transform="translate(200 410)" fill="#e7c36a"><rect x="-1.8" y="0" width="3.6" height="18" rx="1"/><rect x="-6" y="4" width="12" height="3.6" rx="1"/></g>
+
+    <!-- head group, tilted -->
+    <g transform="rotate(-7 200 240)">
+      <!-- hair tail behind -->
+      <path d="M118 210 C96 260 104 320 126 352 C140 330 140 280 138 236 Z" fill="#141414"/>
+      <!-- ears + earrings -->
+      <ellipse cx="111" cy="246" rx="12" ry="20" fill="#6f3f27"/>
+      <ellipse cx="289" cy="246" rx="12" ry="20" fill="#6f3f27"/>
+      <circle cx="110" cy="272" r="9" fill="none" stroke="#e7c36a" stroke-width="3"/>
+      <circle cx="290" cy="272" r="9" fill="none" stroke="#e7c36a" stroke-width="3"/>
+      <!-- face -->
+      <path d="M200 132 C262 132 296 178 294 238 C292 300 252 344 200 344 C148 344 108 300 106 238 C104 178 138 132 200 132 Z" fill="url(#skin)"/>
+      <!-- headwrap -->
+      <path d="M102 222 C96 150 146 104 204 104 C262 104 306 150 298 222 C282 190 246 172 200 172 C154 172 118 190 102 222 Z" fill="#141414"/>
+      <path d="M118 190 C150 168 250 166 284 190" fill="none" stroke="#2c2c2c" stroke-width="4" stroke-linecap="round"/>
+      <path d="M112 210 C150 184 250 182 290 210" fill="none" stroke="#2c2c2c" stroke-width="3" stroke-linecap="round"/>
+      <!-- knot at side -->
+      <path d="M104 212 C86 206 80 226 94 234 C84 246 98 258 110 248 Z" fill="#141414"/>
+      <!-- sunglasses on top -->
+      <g transform="translate(200 116)">
+        <path d="M-74 -6 C-72 -22 -14 -24 -8 -8 C-6 8 -18 18 -42 18 C-64 18 -76 8 -74 -6 Z" fill="#101010" stroke="#000" stroke-width="3"/>
+        <path d="M74 -6 C72 -22 14 -24 8 -8 C6 8 18 18 42 18 C64 18 76 8 74 -6 Z" fill="#101010" stroke="#000" stroke-width="3"/>
+        <path d="M-8 -6 Q0 -12 8 -6" fill="none" stroke="#000" stroke-width="4"/>
+        <path d="M-62 -10 L-40 -14" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".35"/>
+        <path d="M24 -14 L46 -14" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".35"/>
+      </g>
+      <!-- brows -->
+      <path d="M142 206 Q164 194 186 204" fill="none" stroke="#1a1010" stroke-width="5" stroke-linecap="round"/>
+      <path d="M214 202 Q238 192 260 202" fill="none" stroke="#1a1010" stroke-width="5" stroke-linecap="round"/>
+      <!-- eyes: happy, glancing up-right -->
+      <g>
+        <path d="M144 232 Q164 214 186 230 Q164 240 144 232 Z" fill="#fbf4ee"/>
+        <circle cx="173" cy="228" r="7.5" fill="#3a1f14"/>
+        <circle cx="175" cy="226" r="2.2" fill="#fff"/>
+        <path d="M142 232 Q164 210 188 230" fill="none" stroke="#1a1010" stroke-width="4" stroke-linecap="round"/>
+        <path d="M144 226 l-6 -5 M150 220 l-4 -6" stroke="#1a1010" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M214 230 Q236 212 258 228 Q236 240 214 230 Z" fill="#fbf4ee"/>
+        <circle cx="244" cy="226" r="7.5" fill="#3a1f14"/>
+        <circle cx="246" cy="224" r="2.2" fill="#fff"/>
+        <path d="M212 230 Q236 208 260 228" fill="none" stroke="#1a1010" stroke-width="4" stroke-linecap="round"/>
+        <path d="M256 224 l7 -4 M251 218 l5 -6" stroke="#1a1010" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- smile crinkles -->
+        <path d="M150 244 Q164 250 180 244" fill="none" stroke="#4e2a18" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+        <path d="M220 242 Q236 248 252 242" fill="none" stroke="#4e2a18" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+      </g>
+      <!-- nose -->
+      <path d="M198 238 C196 254 190 262 184 268 C190 276 210 276 216 268 C210 262 204 254 202 238" fill="#5e331f" opacity=".55"/>
+      <path d="M182 266 Q186 276 196 274 M218 266 Q214 276 204 274" fill="none" stroke="#3f2114" stroke-width="3" stroke-linecap="round"/>
+      <!-- nose ring -->
+      <circle cx="184" cy="274" r="5.5" fill="none" stroke="#e7c36a" stroke-width="2.5"/>
+      <!-- cheeks -->
+      <ellipse cx="148" cy="272" rx="20" ry="12" fill="#FF6B6B" opacity=".1"/>
+      <ellipse cx="254" cy="270" rx="20" ry="12" fill="#FF6B6B" opacity=".1"/>
+      <!-- lips: full, closed smile -->
+      <path d="M160 296 C176 284 192 286 200 290 C208 286 226 284 242 294 C228 298 214 300 200 300 C186 300 172 300 160 296 Z" fill="#7a2f33"/>
+      <path d="M160 296 C176 300 224 300 242 294 C232 318 214 324 200 324 C184 324 168 316 160 296 Z" fill="#9b4a4a"/>
+      <path d="M158 296 C180 304 222 304 244 293" fill="none" stroke="#4a1c1f" stroke-width="3" stroke-linecap="round"/>
+      <path d="M186 312 Q200 318 214 311" fill="none" stroke="#f4b9b0" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+      <path d="M156 290 q-4 6 2 10 M246 288 q4 6 -2 10" fill="none" stroke="#4a1c1f" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+
+    <!-- arm in lab coat sleeve, hand cupping the jaw -->
+    <path d="M384 500 C374 450 340 404 306 380 L270 404 C290 436 306 470 314 500 Z" fill="url(#coat)" stroke="#c9d9d4" stroke-width="2"/>
+    <path d="M270 404 L306 380" stroke="#c9d9d4" stroke-width="2"/>
+    <!-- wrist + bracelets -->
+    <path d="M268 402 L304 378 L294 360 L258 384 Z" fill="#6a3c25"/>
+    <path d="M262 392 L300 368" stroke="#1f1f1f" stroke-width="8"/>
+    <path d="M262 392 L270 387" stroke="#b81d24" stroke-width="8"/>
+    <path d="M270 387 L278 382" stroke="#ffffff" stroke-width="8"/>
+    <path d="M278 382 L286 377" stroke="#1f7a3a" stroke-width="8"/>
+    <path d="M286 377 L294 372" stroke="#b81d24" stroke-width="8"/>
+    <path d="M258 380 L296 356" stroke="#7da6d8" stroke-width="6"/>
+    <!-- palm -->
+    <path d="M252 372 C244 352 250 330 266 322 C284 314 304 322 308 340 C312 356 300 368 284 372 C272 376 260 378 252 372 Z" fill="#7a4a2f"/>
+    <!-- thumb tucked under the chin -->
+    <path d="M258 352 C248 344 236 338 226 336" fill="none" stroke="#7a4a2f" stroke-width="14" stroke-linecap="round"/>
+    <path d="M246 342 C240 339 234 337 229 337" fill="none" stroke="#4e2a18" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+    <!-- fingers resting up along the cheek -->
+    <g stroke="#7a4a2f" stroke-width="15" stroke-linecap="round" fill="none">
+      <path d="M266 330 C262 314 260 300 262 286"/>
+      <path d="M280 326 C280 308 282 294 286 282"/>
+      <path d="M294 330 C298 314 302 302 308 292"/>
+      <path d="M304 342 C312 332 318 322 322 312"/>
+    </g>
+    <g stroke="#4e2a18" stroke-width="2" stroke-linecap="round" fill="none" opacity=".55">
+      <path d="M273 330 C271 316 271 302 273 290"/>
+      <path d="M287 328 C289 314 291 302 296 290"/>
+      <path d="M300 336 C306 324 310 314 315 304"/>
+    </g>
+    <!-- nails -->
+    <g fill="#c98a6c"><circle cx="262" cy="287" r="3.5"/><circle cx="286" cy="283" r="3.5"/><circle cx="308" cy="293" r="3.5"/><circle cx="322" cy="313" r="3.5"/></g>
+    <!-- rings -->
+    <path d="M256 304 Q262 308 268 304" fill="none" stroke="#e7c36a" stroke-width="4" stroke-linecap="round"/>
+    <path d="M293 312 Q299 316 305 312" fill="none" stroke="#e7c36a" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>

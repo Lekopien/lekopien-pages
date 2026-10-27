@@ -39,7 +39,7 @@ Run it locally by opening `invoices/public/index.html` through any static server
 
 Plain HTML, CSS and JavaScript. Her details live in the `SITE` object at the top of `sarran/site.js`: KNDI registration number, degree, university, email and package prices. Anything left empty shows a marked placeholder ("to be added") on the site, and empty prices show "Ask on WhatsApp".
 
-- **Photo:** upload her portrait as `sarran/img/sarran.jpg`. Until then a labelled placeholder box is shown.
+- **Images:** her portrait is the illustration `sarran/img/sarran-illustration.svg`; her lifestyle photos are the `off-duty-*.jpg` files in the same folder.
 - **Booking:** the form on `services.html` opens WhatsApp (+254 711 169 340) with the request prefilled and requires the privacy consent tick. Nothing is stored on the site.
 - **Blog:** posts are in `sarran/blog/`, in two columns: A Dietitian's World and The Arbiter's Corner. To add one, copy an existing post file and add a card for it in `sarran/blog/index.html` and `sarran/index.html`.
 
