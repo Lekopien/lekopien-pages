@@ -2,7 +2,7 @@
 
 export const DEFAULT_SETTINGS = {
   business: {
-    name: "LEKOPIEN.COM",
+    name: "LEKOPIEN",
     tagline: "Web Engineering · Cloud Hosting · Digital Infrastructure",
     location: "Nairobi, Kenya",
     website: "lekopien.com",
