@@ -133,7 +133,7 @@ function dashboard() {
 
 function topbar(extra = "") {
   return `<header class="top"><div class="wrap">
-    <a class="brand" href="#/">lekopien<span>.</span>invoices</a>
+    <a class="brand" href="#/" aria-label="All invoices"><img src="lekopien-mark.svg" width="24" height="24" alt=""><b>LEKOPIEN</b><small>invoices</small></a>
     <nav>${extra}<button class="btn sm" data-new>+ New invoice</button>
       <a href="#/settings">Settings</a><button class="link" data-export>Backup</button><button class="link" data-import>Restore</button></nav>
   </div><div class="sync wrap" id="sync">${SYNC_LABEL[syncState]}</div></header>`;

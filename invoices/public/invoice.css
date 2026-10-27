@@ -6,6 +6,7 @@
 .doc .page { background: #fff; padding: 15mm 15mm 14mm; min-height: 297mm; margin-bottom: 14px; box-shadow: 0 4px 24px rgba(0, 0, 0, .45); }
 .doc b { font-weight: 700; }
 .doc .doc-head { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; }
+.doc .biz .mark { width: 0.95em; height: 0.95em; margin-right: 0.35em; vertical-align: -0.08em; }
 .doc .biz { font: 800 21pt/1.1 Inter, sans-serif; letter-spacing: .01em; color: var(--navy); }
 .doc .tag { color: var(--soft); font-size: 8.6pt; margin-top: 3px; }
 .doc .meta { text-align: right; }

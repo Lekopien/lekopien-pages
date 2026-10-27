@@ -16,8 +16,6 @@ h1 { font-size: 28px; margin: 24px 0 16px; letter-spacing: -0.02em; }
 
 header.top { border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; background: rgba(13, 21, 21, .95); backdrop-filter: blur(6px); }
 header.top > .wrap:first-child { display: flex; align-items: center; justify-content: space-between; min-height: 58px; gap: 12px; flex-wrap: wrap; }
-.brand { font: 700 15px var(--mono); text-decoration: none; color: var(--text); letter-spacing: .02em; }
-.brand span { color: var(--accent); }
 nav { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 nav a, .link { color: var(--muted); text-decoration: none; font: 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; background: none; border: 0; padding: 0; cursor: pointer; }
 nav a:hover, .link:hover { color: var(--accent); }
@@ -142,3 +140,10 @@ h5 { margin: 16px 0 4px; font: 700 11px var(--mono); text-transform: uppercase; 
   .split { display: block; padding: 0; max-width: none; }
   .preview-wrap { display: block !important; border: 0; padding: 0; background: none; overflow: visible; }
 }
+
+/* Pixel Grid logo lockup: mark, then the LEKOPIEN wordmark (Space Grotesk), then the site name. */
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+.brand img { width: 24px; height: 24px; flex: none; display: block; }
+.brand b { font: 500 15px "Space Grotesk", Inter, sans-serif; letter-spacing: .18em; color: var(--text); }
+.brand small { font: 500 11px var(--mono, "JetBrains Mono", monospace); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border-left: 1px solid var(--line); padding-left: 10px; }
+.brand:hover b { color: var(--accent); }
