@@ -79,7 +79,8 @@ export default {
       const form = await req.formData();
       // Small fixed delay slows down password guessing.
       await new Promise((r) => setTimeout(r, 400));
-      if (!safeEqual(String(form.get("password") ?? ""), secret)) return loginPage("Wrong password.");
+      // Trim both sides: a pasted password or secret often carries a stray space or newline.
+      if (!safeEqual(String(form.get("password") ?? "").trim(), secret.trim())) return loginPage("Wrong password.");
       return new Response(null, {
         status: 303,
         headers: { location: "/", "set-cookie": `${COOKIE}=${await makeSession(secret)}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${SESSION_DAYS * 86400}` },
