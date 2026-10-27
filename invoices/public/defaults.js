@@ -28,14 +28,26 @@ export const DEFAULT_SETTINGS = {
   },
   currency: "KES",
   currencyName: "Kenya Shillings",
+  // Default price of the discovery call line that every new invoice starts with, per currency.
+  discoveryFee: { KES: 10000, USD: 100 },
   prefix: "INV",
   nextNumber: 43,
   dueDays: 7,
 };
 
+export const CURRENCIES = { KES: "Kenya Shillings", USD: "US Dollars" };
+
+export const discoveryItem = (settings, currency) => ({
+  ref: "DC-01",
+  title: "Discovery call",
+  desc: "Scoping session to understand your goals, review your current site and agree the plan, timeline and quote.",
+  qty: 1,
+  rate: Number(settings.discoveryFee?.[currency] ?? DEFAULT_SETTINGS.discoveryFee[currency] ?? 0),
+});
+
 export const DEFAULT_TERMS = [
   "Payment is due within {dueDays} days of the issue date.",
-  "All payments should be made in Kenya Shillings (KES).",
+  "All payments should be made in {currencyName} ({currency}).",
   "Third-party costs (domain registration and renewal, paid mailbox or software subscriptions) are not included and are payable by the client directly to the provider.",
   "Ownership of all delivered files transfers to the client on full payment.",
   "The Terms of Engagement in Annex A form part of this invoice and are accepted on signature or on payment of any amount.",
@@ -137,7 +149,8 @@ export function newInvoice(settings) {
     projectRef: "",
     client: { name: "", attn: "", location: "Nairobi, Kenya", email: "", phone: "" },
     engagement: { title: "", period: "", paymentTerms: `Net ${settings.dueDays} days` },
-    items: [{ ref: "WM-01", title: "", desc: "", qty: 1, rate: 0 }],
+    currency: settings.currency,
+    items: [discoveryItem(settings, settings.currency), { ref: "WM-01", title: "", desc: "", qty: 1, rate: 0 }],
     discount: 0,
     payments: [],
     ...t,

@@ -1,7 +1,7 @@
 // Invoice generator UI: dashboard (#/), editor with live preview (#/edit/<id>), settings (#/settings).
-import { newInvoice, templates } from "./defaults.js";
+import { newInvoice, templates, CURRENCIES, discoveryItem } from "./defaults.js";
 import { fmt, totals, dueDate, liveStatus, longDate } from "./money.js";
-import { renderDocument, esc, scheduleRows } from "./preview.js";
+import { renderDocument, esc, scheduleRows, currencyOf } from "./preview.js";
 import { db, load, save, replaceAll, onSyncChange, syncState } from "./store.js";
 
 const app = document.getElementById("app");
@@ -17,7 +17,14 @@ function setPath(obj, path, value) {
   keys.reduce((o, k) => o[k], obj)[last] = value;
 }
 const badge = (st) => `<span class="badge b-${st}">${STATUS_LABEL[st]}</span>`;
-const money = (n) => `${esc(db.settings.currency)} ${fmt(n)}`;
+const money = (n, cur = current?.items ? currencyOf(current, db.settings) : db.settings.currency) => `${esc(cur)} ${fmt(n)}`;
+/** Sums per currency, e.g. "KES 42,000.00 · USD 100.00". */
+function moneyMix(rows, f) {
+  const by = {};
+  rows.forEach((r) => { const c = currencyOf(r.inv, db.settings); by[c] = (by[c] ?? 0) + f(r); });
+  const parts = Object.entries(by).filter(([, v]) => v);
+  return parts.length ? parts.map(([c, v]) => money(v, c)).join("<br>") : money(0, db.settings.currency);
+}
 
 function field(label, path, value, { type = "text", wide = false, area = false, rows = 3, step, placeholder = "" } = {}) {
   const ph = placeholder ? ` placeholder="${esc(placeholder)}"` : "";
@@ -92,7 +99,6 @@ function dashboard() {
   const rows = db.invoices.map((inv) => ({ inv, st: liveStatus(inv), t: totals(inv) }));
   const open = rows.filter((r) => ["sent", "part-paid", "overdue"].includes(r.st));
   const sum = (list, f) => list.reduce((s, r) => s + f(r), 0);
-  const collected = sum(rows.filter((r) => r.st !== "cancelled"), (r) => r.inv.payments.filter((p) => (p.date ?? "").startsWith(year)).reduce((s, p) => s + (Number(p.amount) || 0), 0));
   const counts = rows.reduce((c, r) => ((c[r.st] = (c[r.st] ?? 0) + 1), c), {});
   const q = query.toLowerCase();
   const shown = rows
@@ -104,10 +110,10 @@ function dashboard() {
   ${topbar()}
   <main class="wrap dash">
     <div class="kpis">
-      <div class="kpi"><span>Outstanding</span><b>${money(sum(open, (r) => r.t.due))}</b><small>${open.length} open invoice${open.length === 1 ? "" : "s"}</small></div>
-      <div class="kpi bad"><span>Overdue</span><b>${money(sum(rows.filter((r) => r.st === "overdue"), (r) => r.t.due))}</b><small>${counts.overdue ?? 0} invoice${counts.overdue === 1 ? "" : "s"}</small></div>
-      <div class="kpi ok"><span>Collected in ${year}</span><b>${money(collected)}</b><small>from payments recorded</small></div>
-      <div class="kpi"><span>Drafts</span><b>${money(sum(rows.filter((r) => r.st === "draft"), (r) => r.t.total))}</b><small>${counts.draft ?? 0} not sent yet</small></div>
+      <div class="kpi"><span>Outstanding</span><b>${moneyMix(open, (r) => r.t.due)}</b><small>${open.length} open invoice${open.length === 1 ? "" : "s"}</small></div>
+      <div class="kpi bad"><span>Overdue</span><b>${moneyMix(rows.filter((r) => r.st === "overdue"), (r) => r.t.due)}</b><small>${counts.overdue ?? 0} invoice${counts.overdue === 1 ? "" : "s"}</small></div>
+      <div class="kpi ok"><span>Collected in ${year}</span><b>${moneyMix(rows.filter((r) => r.st !== "cancelled"), (r) => r.inv.payments.filter((p) => (p.date ?? "").startsWith(year)).reduce((s, p) => s + (Number(p.amount) || 0), 0))}</b><small>from payments recorded</small></div>
+      <div class="kpi"><span>Drafts</span><b>${moneyMix(rows.filter((r) => r.st === "draft"), (r) => r.t.total)}</b><small>${counts.draft ?? 0} not sent yet</small></div>
     </div>
     <div class="toolbar">
       <div class="filters">${["all", "draft", "sent", "part-paid", "overdue", "paid", "cancelled"].map((f) => `<button class="pill${filter === f ? " on" : ""}" data-filter="${f}">${f === "all" ? "All" : STATUS_LABEL[f]} <i>${f === "all" ? rows.length : counts[f] ?? 0}</i></button>`).join("")}</div>
@@ -119,7 +125,7 @@ function dashboard() {
         <td class="mono">${esc(inv.number)}</td>
         <td><b>${esc(inv.client.name || "Untitled client")}</b><small>${esc(inv.engagement.title)}</small></td>
         <td>${longDate(inv.issueDate)}</td><td>${longDate(dueDate(inv))}</td>
-        <td class="n">${fmt(t.total)}</td><td class="n">${fmt(t.due)}</td><td>${badge(st)}</td>
+        <td class="n">${money(t.total, currencyOf(inv, db.settings))}</td><td class="n">${money(t.due, currencyOf(inv, db.settings))}</td><td>${badge(st)}</td>
         <td class="n row-acts"><button class="ic" data-dup="${inv.id}" title="Duplicate">⧉</button><button class="ic del" data-del="${inv.id}" title="Delete">✕</button></td></tr>`).join("")}</tbody>
     </table></div>` : `<div class="empty">${db.invoices.length ? "No invoices match." : `<h2>No invoices yet</h2><p>Outline the work and prices, set the deliverables and contract terms, then print or save it as a PDF.</p><button class="btn" data-new>New invoice</button>`}</div>`}
   </main>`;
@@ -144,6 +150,7 @@ function editorForm(inv) {
     <label class="f"><span>Status</span><select data-bind="status">${["draft", "sent", "cancelled"].map((s) => `<option value="${s}"${inv.status === s ? " selected" : ""}>${STATUS_LABEL[s]}</option>`).join("")}</select></label>
     ${field("Issue date", "issueDate", inv.issueDate, { type: "date" })}
     ${field("Days to pay", "dueDays", inv.dueDays, { type: "number" })}
+    <label class="f"><span>Currency</span><select data-bind="currency">${Object.entries(CURRENCIES).map(([c, n]) => `<option value="${c}"${currencyOf(inv, db.settings) === c ? " selected" : ""}>${c} · ${n}</option>`).join("")}</select></label>
     ${field("Project ref.", "projectRef", inv.projectRef, { placeholder: "e.g. CAPEX-WEB-MIG-01" })}
     <div class="f note"><span>Due</span>${longDate(dueDate(inv))} · ${badge(liveStatus(inv))}</div>
   </div><p class="hint">Paid, part-paid and overdue are worked out from the payments you record below.</p></details>
@@ -168,12 +175,12 @@ function editorForm(inv) {
         ${field("Ref", `items.${i}.ref`, it.ref)}
         ${field("Service", `items.${i}.title`, it.title, { wide: true, placeholder: "What you will do" })}
         ${field("Qty", `items.${i}.qty`, it.qty, { type: "number", step: "any" })}
-        ${field(`Rate (${esc(db.settings.currency)})`, `items.${i}.rate`, it.rate, { type: "number", step: "any" })}
+        ${field(`Rate (${esc(currencyOf(inv, db.settings))})`, `items.${i}.rate`, it.rate, { type: "number", step: "any" })}
       </div>
       ${field("Details", `items.${i}.desc`, it.desc, { area: true, rows: 2, wide: true, placeholder: "Scope of this line, shown under the title" })}
       ${rowTools("items", i, inv.items.length)}</div>`).join("")}
     ${addBtn("items", "Add a service")}
-    <div class="grid" style="margin-top:12px">${field(`Discount (${esc(db.settings.currency)})`, "discount", inv.discount, { type: "number", step: "any" })}<div class="f note"><span>Total</span>${money(t.total)}</div></div>
+    <div class="grid" style="margin-top:12px">${field(`Discount (${esc(currencyOf(inv, db.settings))})`, "discount", inv.discount, { type: "number", step: "any" })}<div class="f note"><span>Total</span>${money(t.total)}</div></div>
   </details>
 
   <details open><summary>Deliverables</summary>
@@ -285,8 +292,9 @@ function settingsView() {
       ${field("Invoice prefix", "prefix", s.prefix)}
       ${field("Next number", "nextNumber", s.nextNumber, { type: "number" })}
       ${field("Default days to pay", "dueDays", s.dueDays, { type: "number" })}
-      ${field("Currency code", "currency", s.currency)}
-      ${field("Currency name", "currencyName", s.currencyName)}
+      <label class="f"><span>Default currency</span><select data-bind="currency">${Object.entries(CURRENCIES).map(([c, n]) => `<option value="${c}"${s.currency === c ? " selected" : ""}>${c} · ${n}</option>`).join("")}</select></label>
+      ${field("Discovery call (KES)", "discoveryFee.KES", s.discoveryFee.KES, { type: "number", step: "any" })}
+      ${field("Discovery call (USD)", "discoveryFee.USD", s.discoveryFee.USD, { type: "number", step: "any" })}
     </div><p class="hint">Next invoice: ${esc(newInvoice(s).number)}</p></details>
     <details open><summary>Default guardrails for new invoices</summary>
       <p>New invoices start with ${t.deliverables.length} deliverable(s), ${t.exclusions.length} exclusion(s), ${t.schedule.length} payment milestone(s) (${t.schedule.map((m) => m.percent + "%").join(" / ")}), ${t.terms.length} terms and a ${t.annex.length}-section Annex A.
@@ -336,12 +344,20 @@ function touch() {
   save();
 }
 
+/** Switching currency moves the discovery call to that currency's default price, unless you changed the price. */
+function repriceDiscovery(inv, from, to) {
+  inv.items.forEach((it) => {
+    if (it.title === "Discovery call" && Number(it.rate) === discoveryItem(db.settings, from).rate) it.rate = discoveryItem(db.settings, to).rate;
+  });
+}
+
 // ---------- events ----------
 app.addEventListener("input", (e) => {
   const el = e.target;
   if (el.id === "q") { query = el.value; const pos = el.selectionStart; dashboard(); const q = document.getElementById("q"); q.focus(); q.setSelectionRange(pos, pos); return; }
   const path = el.dataset.bind;
   if (!path || !current) return;
+  if (path === "currency" && current.items) repriceDiscovery(current, currencyOf(current, db.settings), el.value);
   const v = el.dataset.type === "bool" ? el.checked : el.dataset.type === "num" ? (el.value === "" ? 0 : Number(el.value)) : el.value;
   setPath(current, path, v);
   touch();

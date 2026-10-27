@@ -1,4 +1,5 @@
 // Renders an invoice (and its Annex A terms) as printable A4 HTML, styled after the paper invoice.
+import { CURRENCIES } from "./defaults.js";
 import { fmt, totals, dueDate, longDate, inWords, liveStatus } from "./money.js";
 
 export const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
@@ -24,15 +25,18 @@ export function scheduleRows(inv) {
   });
 }
 
+export const currencyOf = (inv, s) => inv.currency || s.currency;
+export const currencyName = (inv, s) => CURRENCIES[currencyOf(inv, s)] ?? s.currencyName;
+
 /** Values available to terms and annex clauses as {placeholders}. */
 function placeholders(inv, s) {
   const t = totals(inv);
-  const cur = s.currency;
+  const cur = currencyOf(inv, s);
   const sched = scheduleRows(inv).filter((m) => Number(m.percent));
   return {
     person: s.business.person, tradingAs: s.business.tradingAs, location: s.business.location, business: s.business.name,
     client: inv.client.name || "the Client", invoice: inv.number, dueDays: inv.dueDays, dueDate: longDate(dueDate(inv)),
-    total: `${cur} ${fmt(t.total)}`, currency: cur, project: inv.engagement.title,
+    total: `${cur} ${fmt(t.total)}`, currency: cur, currencyName: currencyName(inv, s), project: inv.engagement.title,
     deliverables: inv.deliverables.some((d) => d.trim()) ? `Deliverables: ${lettered(inv.deliverables)}` : "",
     exclusions: inv.exclusions.some((d) => d.trim()) ? `Excluded: ${lettered(inv.exclusions)}` : "",
     schedule: sched.length
@@ -52,7 +56,7 @@ function partyBox(label, lines, accent) {
 }
 
 export function renderDocument(inv, s) {
-  const b = s.business, cur = s.currency, t = totals(inv), vars = placeholders(inv, s);
+  const b = s.business, cur = currencyOf(inv, s), curName = currencyName(inv, s), t = totals(inv), vars = placeholders(inv, s);
   const status = liveStatus(inv);
   const items = inv.items.filter((it) => it.title || it.desc || Number(it.rate));
   const sched = scheduleRows(inv).filter((m) => Number(m.percent));
@@ -69,7 +73,7 @@ export function renderDocument(inv, s) {
         <dt>Issue date</dt><dd>${longDate(inv.issueDate)}</dd>
         <dt>Due date</dt><dd>${longDate(dueDate(inv))}</dd>
         ${inv.projectRef ? `<dt>Project ref.</dt><dd>${esc(inv.projectRef)}</dd>` : ""}
-        <dt>Currency</dt><dd>${esc(s.currencyName)} (${esc(cur)})</dd>
+        <dt>Currency</dt><dd>${esc(curName)} (${esc(cur)})</dd>
       </dl>${status === "paid" ? `<div class="stamp">Paid in full</div>` : status === "cancelled" ? `<div class="stamp void">Cancelled</div>` : ""}</div>`)}
     <div class="rule"></div>
     <div class="parties">
@@ -91,7 +95,7 @@ export function renderDocument(inv, s) {
         <dt>Amount paid</dt><dd>${fmt(t.paid)}</dd>
       </dl>
       <div class="due"><span>Total due</span><b>${esc(cur)} ${fmt(t.due)}</b></div>
-      <div class="words">${esc(s.currencyName)} ${inWords(t.due)} Only</div>
+      <div class="words">${esc(curName)} ${inWords(t.due)} Only</div>
     </div>
 
     ${sched.length ? `<h3 class="sec">Payment schedule</h3>
