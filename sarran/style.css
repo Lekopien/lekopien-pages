@@ -132,3 +132,11 @@ footer .fine { margin-top: 28px; padding-top: 16px; border-top: 1px solid rgba(2
   .row2 { grid-template-columns: 1fr; }
   .wa-float span { display: none; }
 }
+
+/* Photos */
+.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 28px 0; }
+.gallery figure { margin: 0; }
+.gallery img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px; box-shadow: var(--shadow); }
+.gallery figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; }
+article.post .post-hero { width: 100%; max-height: 520px; object-fit: cover; object-position: center 30%; border-radius: 12px; margin: 0 0 24px; }
+@media (max-width: 620px) { .gallery { grid-template-columns: 1fr 1fr; } .gallery figure:last-child { grid-column: span 2; } .gallery figure:last-child img { aspect-ratio: 16 / 11; object-position: center 25%; } }

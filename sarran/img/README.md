@@ -1,7 +1,6 @@
 # Sarran's photos
 
-Drop her photos here with these exact names and the site picks them up on the next deploy:
+- `sarran.jpg` — professional headshot (home, clinical and About pages). Cut out from her golden-hour photo and placed on a sage studio backdrop. Replace it with a studio portrait anytime, same name, about 900 × 1125 px.
+- `off-duty-*.jpg` — lifestyle photos for the About gallery; `off-duty-festival.jpg` is also the cover of the rave recovery post.
 
-- `sarran.jpg` — main portrait (home page and About). Portrait shape works best, about 900 × 1100 px.
-
-Until the file exists, the site shows a labelled placeholder box instead.
+If `sarran.jpg` is ever missing, the site shows a labelled placeholder box instead.
