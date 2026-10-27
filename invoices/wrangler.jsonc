@@ -5,6 +5,8 @@
   "name": "lekopien-invoices",
   "main": "worker.js",
   "compatibility_date": "2025-09-01",
+  // Keep variables added in the dashboard when a new commit redeploys the Worker.
+  "keep_vars": true,
   "assets": { "directory": "./public", "binding": "ASSETS", "run_worker_first": true },
   "routes": [{ "pattern": "invoices.lekopien.com", "custom_domain": true }]
   // Optional: sync invoices across devices with a free KV namespace. Create one named
