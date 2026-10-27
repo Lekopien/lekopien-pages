@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resources · Lekopien</title>
+  <meta name="description" content="Free guides and checklists from Lekopien: launching a website, domains and DNS, speed, SEO and keeping your site safe.">
+  <link rel="stylesheet" href="style.css">
+  <style>.card a.more{display:inline-block;margin-top:10px;font-size:14px} ol.steps li{margin-bottom:8px} .note{color:var(--muted);font-size:14px} dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;margin:0} dt{color:var(--muted)} dd{margin:0;font-weight:600}</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="https://lekopien.com">lekopien<span>.</span>resources</a>
+  <nav><a href="https://info.lekopien.com">Info</a><a href="https://resources.lekopien.com">Resources</a><a href="https://payment.lekopien.com">Payment</a><a href="https://lekopien.com">Main site</a></nav>
+</div></header>
+<main class="wrap">
+
+  <div class="hero">
+    <span class="tag">Free resources</span>
+    <h1>Guides for running a website</h1>
+    <p class="lead">Practical, plain-language checklists we share with every client. Free to use.</p>
+    <div class="btns"><button class="btn" onclick="print()">Print or save as PDF</button></div>
+  </div>
+  <section>
+    <h2>Launch checklist</h2>
+    <div class="card"><ul id="launch" style="list-style:none;padding:0;margin:0"></ul><p class="note" id="progress"></p></div>
+  </section>
+  <section>
+    <h2>Guides</h2>
+    <div class="grid">
+      <div class="card"><h3>Domains and DNS</h3><p>Buy the domain in your own name and keep the login. Point it with an A or CNAME record; changes can take up to a day to spread. Turn on auto-renew.</p></div>
+      <div class="card"><h3>Speed</h3><p>Compress images (WebP or AVIF), lazy-load anything below the fold, limit third-party scripts, and test with PageSpeed Insights on mobile.</p></div>
+      <div class="card"><h3>SEO basics</h3><p>One clear title and description per page, real headings, descriptive image alt text, a sitemap, and your business on Google Business Profile.</p></div>
+      <div class="card"><h3>Security</h3><p>HTTPS everywhere, unique passwords with two-factor login, updates applied promptly, and backups you've actually tested restoring.</p></div>
+      <div class="card"><h3>When your site breaks</h3><p>Note what changed last, take screenshots of errors, check if the domain or hosting expired, then contact us with the URL.</p></div>
+      <div class="card"><h3>Writing content</h3><p>Say who you help and how in the first line. Add prices or "from" prices, real photos, reviews, and one clear call to action per page.</p></div>
+    </div>
+  </section>
+  <section>
+    <h2>Free tools we like</h2>
+    <div class="chips">
+      <a class="chip" href="https://pagespeed.web.dev/">PageSpeed Insights</a>
+      <a class="chip" href="https://search.google.com/search-console">Google Search Console</a>
+      <a class="chip" href="https://squoosh.app/">Squoosh image compressor</a>
+      <a class="chip" href="https://www.ssllabs.com/ssltest/">SSL Labs test</a>
+      <a class="chip" href="https://developers.cloudflare.com/">Cloudflare docs</a>
+      <a class="chip" href="https://wave.webaim.org/">WAVE accessibility checker</a>
+    </div>
+  </section>
+<script>
+  const ITEMS = ["Domain bought in your name, auto-renew on", "HTTPS working on every page", "Site checked on a real phone", "Contact form tested end to end", "Page titles and descriptions written", "Images compressed", "Sitemap submitted to Search Console", "Analytics installed", "Backups scheduled", "Business listed on Google Business Profile"];
+  const KEY = "launch-checklist";
+  let done = [];
+  try { done = JSON.parse(localStorage.getItem(KEY)) || []; } catch {}
+  const list = document.getElementById("launch");
+  const render = () => { document.getElementById("progress").textContent = `${done.length} of ${ITEMS.length} done (saved in this browser)`; };
+  ITEMS.forEach((text, i) => {
+    const label = document.createElement("label");
+    label.style.cssText = "display:flex;gap:10px;align-items:center;padding:6px 0;cursor:pointer";
+    const box = Object.assign(document.createElement("input"), { type: "checkbox", checked: done.includes(i) });
+    box.style.width = "auto";
+    box.onchange = () => { done = box.checked ? [...done, i] : done.filter((x) => x !== i); try { localStorage.setItem(KEY, JSON.stringify(done)); } catch {} render(); };
+    label.append(box, text);
+    const li = document.createElement("li");
+    li.append(label);
+    list.append(li);
+  });
+  render();
+</script>
+</main>
+<footer><div class="wrap">© 2026 Lekopien · <a href="https://lekopien.com">lekopien.com</a> · <a href="https://github.com/Lekopien">GitHub</a></div></footer>
+</body>
+</html>

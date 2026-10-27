@@ -1,0 +1,8 @@
+// Cloudflare Worker (free plan) serving https://info.lekopien.com
+// In Cloudflare, set this folder ("info") as the project's root directory.
+{
+  "name": "lekopien-info",
+  "compatibility_date": "2025-09-01",
+  "assets": { "directory": "." },
+  "routes": [{ "pattern": "info.lekopien.com", "custom_domain": true }]
+}

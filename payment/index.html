@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payment · Lekopien</title>
+  <meta name="description" content="How to pay Lekopien for website projects: M-Pesa or bank transfer, deposits, invoices and receipts.">
+  <link rel="stylesheet" href="style.css">
+  <style>.card a.more{display:inline-block;margin-top:10px;font-size:14px} ol.steps li{margin-bottom:8px} .note{color:var(--muted);font-size:14px} dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;margin:0} dt{color:var(--muted)} dd{margin:0;font-weight:600}</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="https://lekopien.com">lekopien<span>.</span>payment</a>
+  <nav><a href="https://info.lekopien.com">Info</a><a href="https://resources.lekopien.com">Resources</a><a href="https://payment.lekopien.com">Payment</a><a href="https://lekopien.com">Main site</a></nav>
+</div></header>
+<main class="wrap">
+
+  <div class="hero">
+    <span class="tag">Payment</span>
+    <h1>Paying for your project</h1>
+    <p class="lead">Simple, transparent payments. You always get a written quote first, and an invoice and receipt for every payment.</p>
+  </div>
+  <section>
+    <h2>How it works</h2>
+    <div class="grid">
+      <div class="card"><h3>1. Quote</h3><p>We agree the scope, timeline and total price in writing.</p></div>
+      <div class="card"><h3>2. Deposit</h3><p>A deposit reserves your slot and starts the work.</p></div>
+      <div class="card"><h3>3. Build and review</h3><p>You review the preview and request changes.</p></div>
+      <div class="card"><h3>4. Balance and launch</h3><p>Pay the balance and we go live and hand over access.</p></div>
+    </div>
+  </section>
+  <section>
+    <h2>Payment methods</h2>
+    <div class="grid" id="methods">
+      <div class="card"><h3>M-Pesa</h3><dl id="mpesa"></dl></div>
+      <div class="card"><h3>Bank transfer</h3><dl id="bank"></dl></div>
+    </div>
+    <p class="note">Always use your invoice number as the payment reference. Never send money to any number or account that isn't on your invoice or this page.</p>
+  </section>
+  <section>
+    <h2>Questions</h2>
+    <div class="grid">
+      <div class="card"><h3>Can I pay in instalments?</h3><p>Yes, larger projects can be split into milestones. Ask when you request your quote.</p></div>
+      <div class="card"><h3>Do I get a receipt?</h3><p>Yes, every payment is confirmed with a receipt by email.</p></div>
+      <div class="card"><h3>What about card payments?</h3><p>Card payments aren't available yet. M-Pesa and bank transfer are.</p></div>
+    </div>
+  </section>
+<script>
+  // Fill these in to show your payment details. Empty values show "on your invoice" instead.
+  const PAYMENT = {
+    mpesa: { "Paybill / Till": "", "Account": "Your invoice number", "Name": "" },
+    bank: { "Bank": "", "Account name": "", "Account number": "", "Reference": "Your invoice number" },
+  };
+  for (const [id, fields] of Object.entries(PAYMENT)) {
+    const dl = document.getElementById(id);
+    for (const [k, v] of Object.entries(fields)) {
+      dl.append(Object.assign(document.createElement("dt"), { textContent: k }), Object.assign(document.createElement("dd"), { textContent: v || "On your invoice" }));
+    }
+  }
+</script>
+</main>
+<footer><div class="wrap">© 2026 Lekopien · <a href="https://lekopien.com">lekopien.com</a> · <a href="https://github.com/Lekopien">GitHub</a></div></footer>
+</body>
+</html>
