@@ -12,7 +12,7 @@ No build step and no dependencies: each folder is plain HTML and CSS.
 
 ## Payment details
 
-Edit the `PAYMENT` object near the bottom of `payment/index.html` to show your M-Pesa and bank details. Any field left empty shows "On your invoice".
+M-Pesa and NCBA bank details live in the `PAYMENT` object near the bottom of `payment/index.html`. Edit them there if they change.
 
 ## Deploy
 

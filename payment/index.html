@@ -32,10 +32,10 @@
   <section>
     <h2>Payment methods</h2>
     <div class="grid" id="methods">
-      <div class="card"><h3>M-Pesa</h3><dl id="mpesa"></dl></div>
-      <div class="card"><h3>Bank transfer</h3><dl id="bank"></dl></div>
+      <div class="card"><h3>M-Pesa</h3><dl id="mpesa"></dl><button class="btn ghost copy" data-copy="0716873099" style="margin-top:14px">Copy number</button></div>
+      <div class="card"><h3>Bank transfer</h3><dl id="bank"></dl><button class="btn ghost copy" data-copy="5576840014" style="margin-top:14px">Copy account number</button></div>
     </div>
-    <p class="note">Always use your invoice number as the payment reference. Never send money to any number or account that isn't on your invoice or this page.</p>
+    <p class="note"><b>All payments should be made in Kenyan Shillings (KES).</b> Always use your invoice number as the payment reference. Never send money to any number or account that isn't on your invoice or this page.</p>
   </section>
   <section>
     <h2>Questions</h2>
@@ -46,16 +46,23 @@
     </div>
   </section>
 <script>
-  // Fill these in to show your payment details. Empty values show "on your invoice" instead.
   const PAYMENT = {
-    mpesa: { "Paybill / Till": "", "Account": "Your invoice number", "Name": "" },
-    bank: { "Bank": "", "Account name": "", "Account number": "", "Reference": "Your invoice number" },
+    mpesa: { "Send money to": "0716873099", "Name": "David Lekopien", "Reference": "Your invoice number" },
+    bank: {
+      "Payee name": "DAVID LEKOPIEN MUCHIRI", "Bank": "NCBA", "Branch": "Riverside Branch", "Bank code": "07",
+      "Branch code": "000", "SWIFT code": "CBAFKENX", "Account number": "5576840014", "Currency": "Kenyan Shillings (KES)",
+    },
   };
   for (const [id, fields] of Object.entries(PAYMENT)) {
     const dl = document.getElementById(id);
     for (const [k, v] of Object.entries(fields)) {
-      dl.append(Object.assign(document.createElement("dt"), { textContent: k }), Object.assign(document.createElement("dd"), { textContent: v || "On your invoice" }));
+      dl.append(Object.assign(document.createElement("dt"), { textContent: k }), Object.assign(document.createElement("dd"), { textContent: v }));
     }
+  }
+  for (const b of document.querySelectorAll(".copy")) {
+    b.addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = "Copied"; } catch { b.textContent = b.dataset.copy; }
+    });
   }
 </script>
 </main>
